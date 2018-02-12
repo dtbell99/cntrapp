@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import constants from '../Constants'
 
 export default class Main extends React.Component {
@@ -67,14 +67,24 @@ export default class Main extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>{constants.title}</Text>
-                <Button onPress={() => this.changeWeek('<')} title="<" />
-                <Text>{this.state.weeklyData.week} - {this.state.weeklyData.year}</Text>
-                <Button onPress={() => this.changeWeek('>')} title=">" />
-                <View>
-                    <Button onPress={() => this.adjustTotal('-')} title="-" />
-                    <Text>{this.state.weeklyData.total}</Text>
-                    <Button onPress={() => this.adjustTotal('+')} title="+" />
+                <Text style={styles.title}>{constants.title}</Text>
+                <View style={styles.weekView}>
+                    <TouchableOpacity style={styles.weekButton} onPress={() => this.changeWeek('<')}>
+                        <Text style={styles.deductWeekButtonText}>-</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.weekText}>{this.state.weeklyData.week} - {this.state.weeklyData.year}</Text>
+                    <TouchableOpacity style={styles.weekButton} onPress={() => this.changeWeek('<')}>
+                        <Text style={styles.increaseWeekButtonText}>+</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.totalView}>
+                    <TouchableOpacity style={styles.totalButton} onPress={() => this.adjustTotal('-')}>
+                        <Text style={styles.deductTotalButtonText}>-</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.totalText}>{this.state.weeklyData.total}</Text>
+                    <TouchableOpacity style={styles.totalButton} onPress={() => this.adjustTotal('+')}>
+                        <Text style={styles.increaseTotalButtonText}>+</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
@@ -84,8 +94,56 @@ export default class Main extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        flexDirection: 'column',
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        padding: 50
+    },
+    totalView: {
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: '#cccccc',
         alignItems: 'center',
         justifyContent: 'center',
+        height: 20
     },
+    weekView: {
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: '#dddddd',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 50
+    },
+    title: {
+        fontSize: 30
+    },
+    totalButton: {
+        padding: 10,
+        height: 20
+    },
+    deductTotalButtonText: {
+        fontSize: 75,
+        color: 'red'
+    },
+    increaseTotalButtonText: {
+        fontSize: 75,
+        color: 'green'
+    },
+    deductWeekButtonText: {
+        fontSize: 75,
+        color: 'red'
+    },
+    increaseWeekButtonText: {
+        fontSize: 75,
+        color: 'green'
+    },
+    totalText: {
+        fontSize: 50
+    },
+    weekText: {
+        fontSize: 35
+    }
+
 });
