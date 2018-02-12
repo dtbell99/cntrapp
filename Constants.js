@@ -1,5 +1,6 @@
 export const constants = {
-    title: 'Weekly Drinks'
+    title: 'Weekly Jogging',
+    startDate: 'Started'
 }
 
 module.exports = constants

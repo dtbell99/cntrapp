@@ -1,8 +1,8 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
+import { AppRegistry, View, Text, TouchableOpacity, justifyContent } from 'react-native';
 import constants from '../Constants'
 
-export default class Main extends React.Component {
+export default class Test extends Component {
 
     constructor(props) {
         super(props)
@@ -66,84 +66,38 @@ export default class Main extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <Text style={styles.title}>{constants.title}</Text>
-                <View style={styles.weekView}>
-                    <TouchableOpacity style={styles.weekButton} onPress={() => this.changeWeek('<')}>
-                        <Text style={styles.deductWeekButtonText}>-</Text>
+            <View style={{
+                flex: 1,
+                flexDirection: 'column',
+                backgroundColor: '#f1f1f1',
+                alignItems: 'center',
+            }}>
+                <View style={{ width: '100%', height: 50, backgroundColor: '#f1f1f1' }} />
+                <View style={{ width: '100%', height: 100, backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 30, color: 'steelblue' }}>{constants.title}</Text>
+                </View>
+                <View style={{ width: '100%', height: 70, backgroundColor: 'powderblue', alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                    <TouchableOpacity onPress={() => this.changeWeek('<')}>
+                        <Text style={{ fontSize: 30, padding: 20, color: 'steelblue' }}>&lt;</Text>
                     </TouchableOpacity>
-                    <Text style={styles.weekText}>{this.state.weeklyData.week} - {this.state.weeklyData.year}</Text>
-                    <TouchableOpacity style={styles.weekButton} onPress={() => this.changeWeek('<')}>
-                        <Text style={styles.increaseWeekButtonText}>+</Text>
+                    <Text style={{ fontSize: 30, color: 'steelblue' }}>Week {this.state.weeklyData.week} / {this.state.weeklyData.year}</Text>
+                    <TouchableOpacity onPress={() => this.changeWeek('>')}>
+                        <Text style={{ fontSize: 40, padding: 20, color: 'steelblue' }}>></Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.totalView}>
-                    <TouchableOpacity style={styles.totalButton} onPress={() => this.adjustTotal('-')}>
-                        <Text style={styles.deductTotalButtonText}>-</Text>
+                <View style={{ width: '100%', height: 100, backgroundColor: '#f1f1f1', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 30, color: 'steelblue' }}>{constants.startDate}</Text>
+                </View>
+                <View style={{ width: '100%', height: 100, backgroundColor: 'steelblue', alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                    <TouchableOpacity onPress={() => this.adjustTotal('-')}>
+                        <Text style={{ fontSize: 50, padding: 20, color: 'skyblue' }}>-</Text>
                     </TouchableOpacity>
-                    <Text style={styles.totalText}>{this.state.weeklyData.total}</Text>
-                    <TouchableOpacity style={styles.totalButton} onPress={() => this.adjustTotal('+')}>
-                        <Text style={styles.increaseTotalButtonText}>+</Text>
+                    <Text style={{ fontSize: 50, color: 'white' }}>{this.state.weeklyData.total}</Text>
+                    <TouchableOpacity onPress={() => this.adjustTotal('+')}>
+                        <Text style={{ fontSize: 50, padding: 20, color: 'skyblue' }}>+</Text>
                     </TouchableOpacity>
                 </View>
             </View>
         );
     }
-}
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: 50
-    },
-    totalView: {
-        flex: 1,
-        flexDirection: 'row',
-        backgroundColor: '#cccccc',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 20
-    },
-    weekView: {
-        flex: 1,
-        flexDirection: 'row',
-        backgroundColor: '#dddddd',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 50
-    },
-    title: {
-        fontSize: 30
-    },
-    totalButton: {
-        padding: 10,
-        height: 20
-    },
-    deductTotalButtonText: {
-        fontSize: 75,
-        color: 'red'
-    },
-    increaseTotalButtonText: {
-        fontSize: 75,
-        color: 'green'
-    },
-    deductWeekButtonText: {
-        fontSize: 75,
-        color: 'red'
-    },
-    increaseWeekButtonText: {
-        fontSize: 75,
-        color: 'green'
-    },
-    totalText: {
-        fontSize: 50
-    },
-    weekText: {
-        fontSize: 35
-    }
-
-});
+};
