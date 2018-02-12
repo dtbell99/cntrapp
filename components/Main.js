@@ -16,9 +16,32 @@ export default class Main extends React.Component {
     }
 
     changeWeek = (direction) => {
+        var weeklyData = { ... this.state.weeklyData }
+        var week = weeklyData.week
+        var year = weeklyData.year
         switch (direction) {
-
+            case "<":
+                week -= 1
+                if (week === 0) {
+                    week = 12
+                    year -= 1
+                }
+                break
+            case ">":
+                week += 1
+                if (week === 13) {
+                    week = 1
+                    year += 1
+                }
+                break
+            default:
+                console.log("Invalid week change direction")
         }
+        weeklyData.week = week
+        weeklyData.year = year
+        this.setState({
+            weeklyData
+        })
     }
 
     adjustTotal = (direction) => {
@@ -40,8 +63,6 @@ export default class Main extends React.Component {
             weeklyData
         })
     }
-
-
 
     render() {
         return (
